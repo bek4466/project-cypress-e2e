@@ -2,6 +2,7 @@ const apiBaseUrl = Cypress.env('apiBaseUrl');
 
 describe('GraphQL API contract checks', () => {
   it('products query supports category variables and typed response shape', () => {
+    // Query coverage protects field names and variable handling in the GraphQL contract.
     cy.request('POST', `${apiBaseUrl}/graphql`, {
       query: `query ProductsByCategory($category: String!) {
         products(category: $category) { id name category price inventory active }
@@ -16,6 +17,7 @@ describe('GraphQL API contract checks', () => {
   });
 
   it('createOrder mutation returns calculated totals and GraphQL domain errors', () => {
+    // Mutation coverage validates both successful calculations and domain error payloads.
     const mutation = `mutation CreateOrder($productId: ID!, $quantity: Int!) {
       createOrder(productId: $productId, quantity: $quantity) { id status subtotal total }
     }`;

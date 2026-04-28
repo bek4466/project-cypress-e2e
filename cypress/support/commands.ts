@@ -1,6 +1,7 @@
 import users from '../fixtures/users.json';
 import { LoginPage } from '../pages/LoginPage';
 
+// User fixtures model reusable personas for authentication tests.
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -10,6 +11,7 @@ declare global {
 }
 
 Cypress.Commands.add('loginAs', userKey => {
+  // Custom command wraps the common login setup while keeping tests readable.
   const login = new LoginPage();
   const user = users[userKey];
   login.visit();

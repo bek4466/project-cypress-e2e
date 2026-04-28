@@ -1,4 +1,5 @@
 {
+  "_comment": "Selector map centralizes test IDs so page objects do not hard-code locators.",
   "login": {
     "email": "[data-testid='login-email']",
     "password": "[data-testid='login-password']",

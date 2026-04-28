@@ -1,4 +1,5 @@
 {
+  "_comment": "Checkout flow data drives the UI tests without embedding business values in specs.",
   "smokePurchase": {
     "searchTerm": "keyboard",
     "category": "Accessories",

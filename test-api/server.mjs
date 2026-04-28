@@ -14,6 +14,7 @@ const products = [
 ];
 
 const json = (response, statusCode, body, headers = {}) => {
+  // Every mock API response includes a correlation id to mimic enterprise observability.
   response.writeHead(statusCode, {
     'content-type': 'application/json; charset=utf-8',
     'x-correlation-id': randomUUID(),
@@ -23,6 +24,7 @@ const json = (response, statusCode, body, headers = {}) => {
 };
 
 const parseBody = request =>
+  // Parse JSON bodies defensively so negative tests can validate bad input behavior later.
   new Promise(resolve => {
     let raw = '';
     request.on('data', chunk => {
@@ -38,11 +40,13 @@ const parseBody = request =>
   });
 
 const authenticate = request => {
+  // The mock auth model keeps tokens deterministic for test repeatability.
   const token = request.headers.authorization?.replace('Bearer ', '');
   return users.find(user => token === `token-${user.id}`);
 };
 
 function handleGraphql(body) {
+  // Minimal GraphQL dispatcher supports the query/mutation shapes used by contract tests.
   const query = String(body.query ?? '');
   const variables = body.variables ?? {};
   if (query.includes('products')) {

@@ -23,6 +23,7 @@ npm run start:web
 npm run start:api
 npm run start
 npm test
+npm run test:smoke
 npm run test:api
 npm run cy:run
 npm run cy:run:api
@@ -33,6 +34,12 @@ npm run lint:types
 ```
 
 The automated smoke flow signs in, filters products, adds an item to the cart, checks subtotal, submits checkout, and validates the receipt.
+
+## Report Evidence
+
+The screenshot below shows the Allure overview generated from the current local run, including UI, API, and smoke coverage.
+
+![Cypress Allure overview](docs/assets/allure-overview.png)
 
 ## API Testing
 

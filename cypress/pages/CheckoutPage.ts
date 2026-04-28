@@ -9,6 +9,7 @@ type Shipping = {
 
 export class CheckoutPage extends BasePage {
   submitShipping(shipping: Shipping): void {
+    // Uses structured shipping data so checkout scenarios can be varied by JSON.
     cy.get(selectors.checkout.name).clear().type(shipping.name);
     cy.get(selectors.checkout.address).clear().type(shipping.address);
     cy.get(selectors.checkout.city).clear().type(shipping.city);

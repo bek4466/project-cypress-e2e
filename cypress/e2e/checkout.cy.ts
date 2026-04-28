@@ -7,6 +7,7 @@ import { ReceiptPage } from '../pages/ReceiptPage';
 
 describe('QA Cart checkout', () => {
   it('standard user can complete a data-driven checkout flow', () => {
+    // This E2E test stitches together JSON data, page objects, and receipt validation.
     const flow = flowData.smokePurchase;
     const catalog = new CatalogPage();
     const cart = new CartPage();

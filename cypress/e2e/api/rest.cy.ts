@@ -4,6 +4,7 @@ const apiBaseUrl = Cypress.env('apiBaseUrl');
 
 describe('REST API contract checks', () => {
   it('health endpoint exposes operational metadata and correlation id', () => {
+    // Health checks validate readiness plus headers needed for production troubleshooting.
     cy.request(`${apiBaseUrl}/api/health`).then(response => {
       expect(response.status).to.eq(200);
       expect(response.headers['content-type']).to.contain('application/json');
@@ -14,6 +15,7 @@ describe('REST API contract checks', () => {
   });
 
   it('user can authenticate, search inventory, and submit an order', () => {
+    // Happy-path contract covers auth, catalog filtering, and order creation as one workflow.
     cy.request('POST', `${apiBaseUrl}/api/auth/login`, {
       email: users.standardUser.email,
       password: users.standardUser.password
@@ -50,6 +52,7 @@ describe('REST API contract checks', () => {
   });
 
   it('orders enforce auth and inventory business rules', () => {
+    // Negative checks prove expected failures are explicit and machine-readable.
     cy.request({
       method: 'POST',
       url: `${apiBaseUrl}/api/orders`,
