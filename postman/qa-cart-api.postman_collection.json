@@ -1,0 +1,129 @@
+{
+  "info": {
+    "name": "QA Cart API Contract Tests",
+    "description": "REST and GraphQL examples for the local QA Cart API service used by the automation framework.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "REST - Health",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/health"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('service is healthy', () => pm.response.to.have.status(200));",
+              "pm.test('correlation id is present', () => pm.expect(pm.response.headers.get('x-correlation-id')).to.not.be.empty);",
+              "pm.test('version is semver-like', () => pm.expect(pm.response.json().version).to.match(/^\\d+\\.\\d+\\.\\d+$/));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "REST - Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"qa.lead@example.com\",\n  \"password\": \"Automation123!\"\n}"
+        },
+        "url": "{{baseUrl}}/api/auth/login"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('login succeeds', () => pm.response.to.have.status(200));",
+              "pm.environment.set('authToken', pm.response.json().token);",
+              "pm.test('role is qa-admin', () => pm.expect(pm.response.json().user.role).to.eql('qa-admin'));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "REST - Create Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{authToken}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"productId\": \"prd-100\",\n  \"quantity\": 1\n}"
+        },
+        "url": "{{baseUrl}}/api/orders"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('order is created', () => pm.response.to.have.status(201));",
+              "pm.test('total includes tax', () => pm.expect(pm.response.json().total).to.eql(139.64));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "GraphQL - Products",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"query ProductsByCategory($category: String!) { products(category: $category) { id name category price inventory active } }\",\n  \"variables\": {\n    \"category\": \"Accessories\"\n  }\n}"
+        },
+        "url": "{{baseUrl}}/graphql"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('graphql request succeeds', () => pm.response.to.have.status(200));",
+              "pm.test('keyboard product is returned', () => pm.expect(pm.response.json().data.products.map(product => product.id)).to.include('prd-100'));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "GraphQL - Missing Product Error",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"mutation CreateOrder($productId: ID!, $quantity: Int!) { createOrder(productId: $productId, quantity: $quantity) { id status subtotal total } }\",\n  \"variables\": {\n    \"productId\": \"missing-product\",\n    \"quantity\": 1\n  }\n}"
+        },
+        "url": "{{baseUrl}}/graphql"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('graphql transport succeeds', () => pm.response.to.have.status(200));",
+              "pm.test('domain error is explicit', () => pm.expect(pm.response.json().errors[0].extensions.code).to.eql('NOT_FOUND'));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
