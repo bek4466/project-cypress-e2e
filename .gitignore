@@ -2,5 +2,7 @@ node_modules/
 cypress/screenshots/
 cypress/videos/
 cypress/downloads/
+allure-results/
+allure-report/
 .env
 .DS_Store

@@ -19,7 +19,13 @@ npm install
 npm run start
 npm test
 npm run cy:open
+npm run allure:generate
+npm run allure:open
 npm run lint:types
 ```
 
 The automated smoke flow signs in, filters products, adds an item to the cart, checks subtotal, submits checkout, and validates the receipt.
+
+## CI/CD
+
+`Jenkinsfile` provides a declarative pipeline template that checks out the repo, runs `npm ci`, type-checks the framework, executes the Cypress suite against the local app, archives screenshots/videos, and publishes Allure results from `allure-results`.

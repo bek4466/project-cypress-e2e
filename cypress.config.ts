@@ -1,4 +1,5 @@
 import { defineConfig } from 'cypress';
+import { allureCypress } from 'allure-cypress/reporter';
 
 export default defineConfig({
   e2e: {
@@ -13,6 +14,10 @@ export default defineConfig({
       openMode: 0
     },
     setupNodeEvents(on, config) {
+      allureCypress(on, config, {
+        resultsDir: 'allure-results',
+        videoOnFailOnly: true
+      });
       return config;
     }
   }
