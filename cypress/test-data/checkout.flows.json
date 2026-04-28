@@ -1,0 +1,19 @@
+{
+  "smokePurchase": {
+    "searchTerm": "keyboard",
+    "category": "Accessories",
+    "productName": "Aurora Keyboard",
+    "quantity": 1,
+    "shipping": {
+      "name": "Bekt Automation",
+      "address": "100 Quality Ave",
+      "city": "Chicago"
+    },
+    "expected": {
+      "cartCount": "1",
+      "subtotal": "$129.00",
+      "total": "$139.64",
+      "receiptCustomer": "Bekt Automation"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QA Cart</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel login-panel" data-testid="login-panel">
+        <h1>QA Cart</h1>
+        <label>Email <input data-testid="login-email" value="qa.lead@example.com" /></label>
+        <label>Password <input data-testid="login-password" type="password" value="Automation123!" /></label>
+        <button data-testid="login-submit">Sign in</button>
+        <p class="error" data-testid="login-error"></p>
+      </section>
+      <section class="panel app-panel hidden" data-testid="app-panel">
+        <header>
+          <div>
+            <span>Signed in as</span>
+            <strong data-testid="account-name"></strong>
+          </div>
+          <button data-testid="open-cart">Cart (<span data-testid="cart-count">0</span>)</button>
+        </header>
+        <div class="filters">
+          <input data-testid="product-search" placeholder="Search products" />
+          <select data-testid="category-filter">
+            <option value="All">All</option>
+            <option value="Accessories">Accessories</option>
+            <option value="Hardware">Hardware</option>
+          </select>
+        </div>
+        <section class="products" data-testid="product-list"></section>
+        <aside class="cart hidden" data-testid="cart-panel">
+          <h2>Cart</h2>
+          <div data-testid="cart-line-items"></div>
+          <p>Subtotal <strong data-testid="cart-subtotal">$0.00</strong></p>
+          <button data-testid="checkout-button">Checkout</button>
+        </aside>
+        <form class="checkout hidden" data-testid="checkout-panel">
+          <h2>Shipping</h2>
+          <input data-testid="checkout-name" placeholder="Name" />
+          <input data-testid="checkout-address" placeholder="Address" />
+          <input data-testid="checkout-city" placeholder="City" />
+          <button type="submit" data-testid="place-order">Place order</button>
+        </form>
+        <section class="receipt hidden" data-testid="receipt-panel">
+          <h2>Receipt</h2>
+          <p>Order <strong data-testid="order-number"></strong></p>
+          <p>Customer <strong data-testid="receipt-customer"></strong></p>
+          <p>Total <strong data-testid="receipt-total"></strong></p>
+        </section>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>

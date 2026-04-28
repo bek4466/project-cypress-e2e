@@ -1,0 +1,12 @@
+{
+  "standardUser": {
+    "email": "qa.lead@example.com",
+    "password": "Automation123!",
+    "displayName": "QA Lead"
+  },
+  "lockedUser": {
+    "email": "locked@example.com",
+    "password": "Automation123!",
+    "displayName": "Locked User"
+  }
+}

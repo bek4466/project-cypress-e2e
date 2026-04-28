@@ -1,0 +1,21 @@
+{
+  "name": "project-cypress-e2e",
+  "version": "1.0.0",
+  "description": "Data-driven Cypress automation framework for a demo commerce workflow.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "http-server test-app -a 127.0.0.1 -p 4174 -c-1",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test": "start-server-and-test start http://127.0.0.1:4174 cy:run",
+    "test:chrome": "cypress run --browser chrome",
+    "lint:types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "cypress": "^14.4.1",
+    "http-server": "^14.1.1",
+    "start-server-and-test": "^2.0.10",
+    "typescript": "^5.8.3"
+  }
+}

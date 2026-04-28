@@ -1,0 +1,35 @@
+{
+  "login": {
+    "email": "[data-testid='login-email']",
+    "password": "[data-testid='login-password']",
+    "submit": "[data-testid='login-submit']",
+    "error": "[data-testid='login-error']",
+    "accountName": "[data-testid='account-name']"
+  },
+  "catalog": {
+    "search": "[data-testid='product-search']",
+    "category": "[data-testid='category-filter']",
+    "productCards": "[data-testid='product-card']",
+    "productName": "[data-testid='product-name']",
+    "addToCart": "[data-testid='add-to-cart']"
+  },
+  "cart": {
+    "open": "[data-testid='open-cart']",
+    "count": "[data-testid='cart-count']",
+    "lineItems": "[data-testid='cart-line-item']",
+    "subtotal": "[data-testid='cart-subtotal']",
+    "checkout": "[data-testid='checkout-button']"
+  },
+  "checkout": {
+    "name": "[data-testid='checkout-name']",
+    "address": "[data-testid='checkout-address']",
+    "city": "[data-testid='checkout-city']",
+    "submit": "[data-testid='place-order']"
+  },
+  "receipt": {
+    "panel": "[data-testid='receipt-panel']",
+    "orderNumber": "[data-testid='order-number']",
+    "customer": "[data-testid='receipt-customer']",
+    "total": "[data-testid='receipt-total']"
+  }
+}
