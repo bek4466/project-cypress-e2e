@@ -11,5 +11,7 @@ describe('Smoke checks', () => {
       expect(response.status).to.eq(200);
       expect(response.body.status).to.eq('UP');
     });
+
+    cy.captureEvidence('smoke-application-shell-and-api-health');
   });
 });

@@ -6,6 +6,7 @@ declare global {
   namespace Cypress {
     interface Chainable {
       loginAs(userKey: keyof typeof users): Chainable<void>;
+      captureEvidence(name: string): Chainable<void>;
     }
   }
 }
@@ -17,6 +18,14 @@ Cypress.Commands.add('loginAs', userKey => {
   login.visit();
   login.login(user.email, user.password);
   login.accountName().should('have.text', user.displayName);
+});
+
+Cypress.Commands.add('captureEvidence', name => {
+  // Explicit evidence screenshots make passing Allure reports useful, not just failure reports.
+  cy.screenshot(`evidence/${name}`, {
+    capture: 'runner',
+    overwrite: true
+  });
 });
 
 export {};

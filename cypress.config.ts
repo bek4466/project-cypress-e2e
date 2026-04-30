@@ -20,7 +20,7 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       allureCypress(on, config, {
         resultsDir: 'allure-results',
-        videoOnFailOnly: true
+        videoOnFailOnly: false
       });
       return config;
     }

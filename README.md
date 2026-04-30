@@ -54,6 +54,8 @@ Cypress artifact cleanup is disabled in `cypress.config.ts` because some macOS s
 
 The `term-size: Bad CPU type in executable` warning can appear from a Cypress-bundled helper on Apple Silicon. It is noisy but non-blocking when the spec summary still reports passing tests.
 
+Allure is configured to attach videos for passing and failing runs. Smoke tests also call `cy.captureEvidence(...)` so the report includes a screenshot even when the test passes.
+
 ## CI/CD
 
 `Jenkinsfile` provides a declarative pipeline template that checks out the repo, runs `npm ci`, type-checks the framework, executes UI and API tests against local services, archives screenshots/videos, and publishes Allure results from `allure-results`.
