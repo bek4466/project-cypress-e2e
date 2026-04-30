@@ -13,6 +13,7 @@
     "cy:run": "cypress run",
     "cy:run:smoke": "cypress run --spec 'cypress/e2e/smoke.cy.ts'",
     "cy:run:api": "cypress run --spec 'cypress/e2e/api/**/*.cy.ts'",
+    "clean:artifacts": "rm -rf cypress/screenshots cypress/videos allure-results allure-report",
     "test": "start-server-and-test start http://127.0.0.1:5174/api/health cy:run",
     "test:smoke": "start-server-and-test start http://127.0.0.1:5174/api/health cy:run:smoke",
     "test:api": "start-server-and-test start http://127.0.0.1:5174/api/health cy:run:api",

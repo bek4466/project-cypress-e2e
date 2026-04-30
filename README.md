@@ -28,6 +28,7 @@ npm run test:api
 npm run cy:run
 npm run cy:run:api
 npm run cy:open
+npm run clean:artifacts
 npm run allure:generate
 npm run allure:open
 npm run lint:types
@@ -46,6 +47,12 @@ The screenshot below shows the Allure overview generated from the current local 
 The local API exposes REST endpoints for health, login, products, and orders, plus a GraphQL endpoint for product queries and order mutations. The API suites validate status codes, headers, correlation IDs, authentication, response shapes, domain totals, authorization failures, inventory conflicts, and GraphQL error payloads.
 
 Postman examples are available in `postman/qa-cart-api.postman_collection.json` with a matching local environment in `postman/qa-cart-api.postman_environment.json`.
+
+## Local Troubleshooting
+
+Cypress artifact cleanup is disabled in `cypress.config.ts` because some macOS setups can throw `spawn Unknown system error -86` while Cypress tries to trash old run results. Use `npm run clean:artifacts` when you want to remove videos, screenshots, and Allure output before a fresh run.
+
+The `term-size: Bad CPU type in executable` warning can appear from a Cypress-bundled helper on Apple Silicon. It is noisy but non-blocking when the spec summary still reports passing tests.
 
 ## CI/CD
 
